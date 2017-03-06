@@ -17,7 +17,7 @@ None
 
 Input
 -------
-For each input signal write `Row` evaluation to `File`
+For each input signal append `Row` to `File`
 
 Output
 ---------
