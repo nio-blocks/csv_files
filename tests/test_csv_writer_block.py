@@ -25,13 +25,13 @@ class TestWriteLines(NIOBlockTestCase):
         blk.stop()
 
     def test_bad_data(self):
-        """row does not evaluate to a list, exception is raised"""
+        """row does not evaluate to a list, error logged"""
         blk = CSVWriter()
-        blk.logger = MagicMock()
         self.configure_block(blk, {
             'file': '{{ $file }}',
             'row': '{{ $key }}'
         })
+        blk.logger = MagicMock()
         blk.start()
         m = mock_open()
         with patch('builtins.open', m):
