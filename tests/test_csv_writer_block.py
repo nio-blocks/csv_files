@@ -1,19 +1,46 @@
 from nio.block.terminals import DEFAULT_TERMINAL
 from nio.signal.base import Signal
 from nio.testing.block_test_case import NIOBlockTestCase
-from ..csv_writer import CSVWriter
+from unittest.mock import patch, MagicMock, mock_open
+from ..csv_writer_block import CSVWriter
 
 
 class TestWriteLines(NIOBlockTestCase):
 
     def test_process_signals(self):
-        """Signals pass through block unmodified."""
-        blk = Example()
-        self.configure_block(blk, {})
+        blk = CSVWriter()
+        self.configure_block(blk, {
+            'file': '{{ $file }}',
+            'row': '{{ [$key] }}'
+        })
         blk.start()
-        blk.process_signals([Signal({"hello": "n.io"})])
+        m = mock_open()
+        with patch('builtins.open', m):
+            blk.process_signals([Signal({
+                'file': 'name',
+                'key': 'value'
+            })])
+            m.assert_called_once_with('name', 'a', newline='')
+            m().write.assert_called_once_with('value\r\n')
         blk.stop()
-        self.assert_num_signals_notified(1)
-        self.assertDictEqual(
-            self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
-            {"hello": "n.io"})
+
+    def test_bad_data(self):
+        """row does not evaluate to a list, exception is raised"""
+        blk = CSVWriter()
+        blk.logger = MagicMock()
+        self.configure_block(blk, {
+            'file': '{{ $file }}',
+            'row': '{{ $key }}'
+        })
+        blk.start()
+        m = mock_open()
+        with patch('builtins.open', m):
+            blk.process_signals([Signal({
+                'file': 'name',
+                'key': 'value'
+            })])
+        self.assert_num_signals_notified(0)
+        blk.logger.exception.assert_called_once_with(
+            'row must evaluate to a list'
+        )
+        blk.stop()

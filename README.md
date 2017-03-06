@@ -1,7 +1,6 @@
 CSVWriter
 ===========
-
-Writes to .csv file.
+Writes to .csv file
 
 Properties
 --------------
@@ -18,7 +17,7 @@ None
 
 Input
 -------
-For each input signal, evaluate `Row` and write resul to the file specified by `File`.
+For each input signal write `Row` evaluation to `File`
 
 Output
 ---------
