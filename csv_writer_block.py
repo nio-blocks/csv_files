@@ -1,6 +1,6 @@
 from nio.block.base import Block
 from nio.properties import Property
-from csv import *
+import csv
 
 
 class CSVWriter(Block):
@@ -21,7 +21,7 @@ class CSVWriter(Block):
                     self.logger.debug(
                         '{} opened'.format(file_name)
                     )
-                    writer(csvfile).writerow(data)
+                    csv.writer(csvfile).writerow(data)
                     self.logger.debug(
                         '{} appended to end of file'.format(data)
                     )
