@@ -39,11 +39,7 @@ class TestWriteLines(NIOBlockTestCase):
                 'file': 'name',
                 'key': 'value'
             })])
-<<<<<<< HEAD
         blk.logger.error.assert_called_once_with(
-=======
-        blk.logger.exception.assert_called_once_with(
->>>>>>> 15c45c44f113dca6ac45bb14f8d1bab5b44fba3f
             'row must evaluate to a list'
         )
         blk.stop()
