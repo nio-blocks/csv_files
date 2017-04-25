@@ -11,14 +11,14 @@ class TestWriteLines(NIOBlockTestCase):
         blk = CSVWriter()
         self.configure_block(blk, {
             'file': '{{ $file }}',
-            'row': '{{ [$key] }}'
+            'row': '{{ [$key] }}',
         })
         blk.start()
         m = mock_open()
         with patch('builtins.open', m):
             blk.process_signals([Signal({
                 'file': 'name',
-                'key': 'value'
+                'key': 'value',
             })])
             m.assert_called_once_with('name', 'a', newline='')
             m().write.assert_called_once_with('value\r\n')
@@ -29,7 +29,7 @@ class TestWriteLines(NIOBlockTestCase):
         blk = CSVWriter()
         self.configure_block(blk, {
             'file': '{{ $file }}',
-            'row': '{{ $key }}'
+            'row': '{{ $key }}',
         })
         blk.logger = MagicMock()
         blk.start()
@@ -37,7 +37,7 @@ class TestWriteLines(NIOBlockTestCase):
         with patch('builtins.open', m):
             blk.process_signals([Signal({
                 'file': 'name',
-                'key': 'value'
+                'key': 'value',
             })])
         blk.logger.error.assert_called_once_with(
             'row must evaluate to a list'

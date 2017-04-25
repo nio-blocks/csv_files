@@ -1,17 +1,17 @@
 from nio.block.base import Block
-from nio.properties import Property, VersionProperty
+from nio.properties import Property, FileProperty, VersionProperty
 import csv
 
 
 class CSVWriter(Block):
 
-    file = Property(title='File', default='output.csv') # file property
+    file = FileProperty(title='File', default='output.csv')
     row = Property(title='Row', default='')
     version = VersionProperty('0.1.0')
 
     def process_signals(self, signals):
         for signal in signals:
-            file_name = self.file(signal)
+            file_name = self.file(signal).value
             data = self.row(signal)
             if not isinstance(data, list):
                 self.logger.error('row must evaluate to a list')
