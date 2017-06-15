@@ -1,5 +1,5 @@
 from nio.block.base import Block
-from nio.properties import Property, FileProperty, VersionProperty, BoolProperty
+from nio.properties import *
 import csv
 
 
