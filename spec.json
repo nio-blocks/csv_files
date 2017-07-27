@@ -1,0 +1,19 @@
+{
+  "nio/CSVWriter": {
+    "Commands": {},
+    "Dependencies": [],
+    "Description": "",
+    "Input": "",
+    "Output": "",
+    "Properties": {
+      "File": {
+        "default": "output.csv",
+        "description": ""
+      },
+      "Row": {
+        "description": ""
+      }
+    },
+    "Version": "0.1.0"
+  }
+}
