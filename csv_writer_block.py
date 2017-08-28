@@ -1,9 +1,10 @@
-from nio.block.base import Block
-from nio.properties import Property, FileProperty, VersionProperty
 import csv
 
+from nio import TerminatorBlock
+from nio.properties import Property, FileProperty, VersionProperty
 
-class CSVWriter(Block):
+
+class CSVWriter(TerminatorBlock):
 
     file = FileProperty(title='File', default='output.csv')
     row = Property(title='Row', default='')
