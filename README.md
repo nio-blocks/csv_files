@@ -1,24 +1,24 @@
 CSVWriter
-===========
-Writes to .csv file
+=========
+Write to a .csv file.  For each input signal append `Row` to `File`
 
 Properties
---------------
-* File
-* Row
+----------
+- **file**: File name to write csv data to.
+- **row**: Data to write to the csv file
 
-Dependencies
-----------------
-[csv](https://docs.python.org/3.4/library/csv.html#module-csv)
+Inputs
+------
+- **default**: Any list of signals with data to write
 
-Commands
-----------------
+Outputs
+-------
 None
 
-Input
--------
-For each input signal append `Row` to `File`
+Commands
+--------
+None
 
-Output
----------
+Dependencies
+------------
 None

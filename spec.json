@@ -1,10 +1,27 @@
 {
   "nio/CSVWriter": {
-    "version": "0.0.1",
-    "description": "",
-    "inputs": {},
+    "version": "0.1.0",
+    "description": "Write to a .csv file.  For each input signal append `Row` to `File`",
+    "properties": {
+      "file": {
+        "title": "File",
+        "type": "FileType",
+        "description": "File name to write csv data to.",
+        "default": "output.csv"
+      },
+      "row": {
+        "title": "Row",
+        "type": "Type",
+        "description": "Data to write to the csv file",
+        "default": ""
+      }
+    },
+    "inputs": {
+      "default": {
+        "description": "Any list of signals with data to write"
+      }
+    },
     "outputs": {},
-    "properties": {},
     "commands": {}
   }
 }
