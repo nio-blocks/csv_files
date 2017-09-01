@@ -8,7 +8,7 @@ class CSVWriter(TerminatorBlock):
 
     file = FileProperty(title='File', default='output.csv')
     row = Property(title='Row', default='')
-    version = VersionProperty('0.1.0')
+    version = VersionProperty("0.1.0")
 
     def process_signals(self, signals):
         for signal in signals:
