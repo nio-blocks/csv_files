@@ -2,6 +2,9 @@
   "nio/CSVWriter": {
     "version": "0.1.0",
     "description": "Write to a .csv file.  For each input signal append `Row` to `File`",
+    "categories": [
+      "File System"
+    ],
     "properties": {
       "file": {
         "title": "File",
