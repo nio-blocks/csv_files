@@ -23,7 +23,7 @@ class TestReadLines(NIOBlockTestCase):
         blk.stop()
         self.assert_num_signals_notified(3)
         self.assert_signal_list_notified(
-            [Signal({'line': line}) for line in lines])
+            [Signal({'row': line}) for line in lines])
 
     def test_loop(self):
         blk = CSVReader()
