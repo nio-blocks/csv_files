@@ -30,13 +30,13 @@ class CSVReader(Block):
         output = []
         for signal in signals:
             try:
-                line = self.reader.__next__()
+                row = self.reader.__next__()
             except StopIteration as e:
                 if self.loop():
                     self.csvfile.seek(0)
-                    line = self.reader.__next__()
+                    row = self.reader.__next__()
                 else:
                     raise e
-            output.append(Signal({'line': line}))
+            output.append(Signal({'row': row}))
         self.logger.debug('notifying {} signals'.format(len(output)))
         self.notify_signals(output)
