@@ -24,3 +24,21 @@ class TestReadLines(NIOBlockTestCase):
         self.assert_num_signals_notified(3)
         self.assert_signal_list_notified(
             [Signal({'line': line}) for line in lines])
+
+    def test_loop(self):
+        blk = CSVReader()
+        lines = ['foo', 'bar', 'baz', StopIteration]
+        m = mock_open()
+        with patch(blk.__module__ + '.csv') as mock_csv:
+            with patch('builtins.open', m):
+                def process_sigs():
+                    blk.process_signals([Signal()] * 3)
+                mock_reader = mock_csv.reader.return_value
+                mock_reader.__next__.side_effect = lines
+                self.configure_block(blk, {'loop': True})
+                blk.start()
+                process_sigs()
+                # out of lines, loop back to beginning
+                self.assertRaises(StopIteration, process_sigs)
+                self.assertEqual(m.return_value.seek.call_count, 1)
+        blk.stop()
