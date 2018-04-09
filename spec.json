@@ -1,7 +1,39 @@
 {
+  "nio/CSVReader": {
+    "version": "0.1.0",
+    "description": "Read lines from a CSV file. For each incoming signal, one row is read from `file`.",
+    "categories": [
+      "File System"
+    ],
+    "properties": {
+      "file": {
+        "title": "File",
+        "type": "FileType",
+        "description": "File path to open and read.",
+        "default": "input.csv"
+      },
+      "loop": {
+        "title": "Loop?",
+        "type": "BoolType",
+        "description": "Return to start of file when out of lines.",
+        "default": true
+      }
+    },
+    "inputs": {
+      "default": {
+        "description": "Any list of signals."
+      }
+    },
+    "outputs": {
+      "default": {
+        "description": "A list of signals of equal length to input signals.\n  - *row* (array) The next line of the file, where each value (cell) of the row is an element of the array."
+      }
+    },
+    "commands": {}
+  },
   "nio/CSVWriter": {
     "version": "0.1.0",
-    "description": "Write to a CSV file.  For each input signal append `Row` to `File`",
+    "description": "Write to a CSV file. For each incoming signal `row` is appended to `file`.",
     "categories": [
       "File System"
     ],
