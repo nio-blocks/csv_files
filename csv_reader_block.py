@@ -8,7 +8,7 @@ class CSVReader(Block):
 
     file = FileProperty(title='File', default='input.csv')
     loop = BoolProperty(title='Loop?', default=True)
-    version = VersionProperty("0.1.0")
+    version = VersionProperty("0.1.1")
 
     def __init__(self):
         super().__init__()
