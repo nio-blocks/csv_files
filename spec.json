@@ -2,7 +2,9 @@
   "nio/CSVReader": {
     "version": "0.1.0",
     "description": "Read lines from a CSV file. For each incoming signal, one row is read from `file`.",
-    "categories": [],
+    "categories": [
+      "File System"
+    ],
     "properties": {
       "file": {
         "title": "File",
