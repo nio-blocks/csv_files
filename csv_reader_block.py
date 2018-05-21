@@ -29,14 +29,19 @@ class CSVReader(Block):
     def process_signals(self, signals):
         output = []
         for signal in signals:
+            fail = False
             try:
                 row = self.reader.__next__()
+                output.append(Signal({'row': row}))
             except StopIteration as e:
                 if self.loop():
                     self.csvfile.seek(0)
                     row = self.reader.__next__()
+                    output.append(Signal({'row': row}))
                 else:
-                    raise e
-            output.append(Signal({'row': row}))
+                    pass
+                    fail = True
         self.logger.debug('notifying {} signals'.format(len(output)))
         self.notify_signals(output)
+        if fail:
+            self.logger.warning('out of rows, {} signals dropped'.format(len(signals) - len(output)))
