@@ -41,9 +41,12 @@ class TestReadLines(NIOBlockTestCase):
                 mock_reader = mock_csv.reader.return_value
                 mock_reader.__next__.side_effect = lines
                 self.configure_block(blk, {'file': 'foo.csv', 'loop': False})
+                blk.logger = MagicMock()
                 blk.start()
                 # three signals, only two rows available, log warning
                 blk.process_signals([Signal()] * 3)
+                blk.logger.warning.assert_called_once_with(
+                    'foo.csv out of rows, 1 signals dropped')
                 self.assert_num_signals_notified(2)
                 self.assert_signal_list_notified(
                     [Signal({'row': line}) for line in lines])
