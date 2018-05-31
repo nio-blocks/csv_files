@@ -15,8 +15,8 @@ class CSVReader(Block):
         self.reader = None
         self.csvfile = None
 
-    def start(self):
-        super().start()
+    def configure(self, context):
+        super().configure(context)
         # csv module requires file objects be opened with newline=''
         self.csvfile = open(self.file().value, newline='')
         self.logger.debug('{} opened'.format(self.file().value))
